@@ -1,20 +1,208 @@
-!doctype html>
-<html lang="zh-cmn-Hans">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no"/>
-    <meta name="renderer" content="webkit"/>
-    <meta name="force-rendering" content="webkit"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<?
+$version = $_POST['app_version'];
+$lastver = file_get_contents("ver_lasted.json");
+if($version!=$lastver){
+    header("Location: ./new_ver.php");
+    exit;
+}
+if($_COOKIE['login']==true){
+    $user = $_COOKIE['user'];
+    $tip = '欢迎回来';
+}
+else{
+    $user = '未登录';
+    $tip = '登陆 / 注册';
+}
+?>
 
+<!doctype html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <!-- MDUI CSS -->
     <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css"/>
-    <title>Hello, world!</title>
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
+    <link rel="stylesheet" href="./mdui_mc/style1.css" />
+    <title>TheChuan1503</title>
+    <style>
+        #blogifr {
+            border:0px solid black;
+        }
+        body {
+            user-select: none;
+        }
+        [select] {
+            user-select: text;
+        }
+        [center] {
+            text-align:center;
+        }
+        .card {
+            vertical-align:middle;
+            padding:4px;
+            margin:4px 8px 4px 8px;
+            box-width:100%;
+            height:64px;
+            background-color:black;
+        }
+        
+        .cardimg{
+            height:100%;
+            display:inline;
+            vertical-align:middle;
+            float:left;
+        }
+        .card-browatch{
+            background: linear-gradient(to right, black, teal);
+        }
+        .cardtitle,
+        .cardp,
+        .cardd{
+            
+            display:inline;
+        }
+        .cardtitle{
+            line-height:56px;
+        }
+    </style>
+</head>
+<body id="body" style="
+background-color:rgb(32,32,32);
+" class="
+mdui-appbar-with-toolbar
+mdui-theme-primary-indigo
+mdui-theme-accent-indigo
+mdui-theme-layout-dark
+mdui-bottom-nav-fixed">
+    
+    <div class="mdui-appbar mdui-appbar-fixed mdui-color-black">
+    <div class="mdui-toolbar">
+        <a onclick="dra.cha('dra-main')" class="mdui-btn mdui-btn-icon">
+            <i class="mdui-icon material-icons">menu</i>
+        </a>
+        <h2 class="headline">TheChuan1503</h2>
+        <div class="mdui-toolbar-spacer"></div>
+    </div>
+</div>
 
+<!--侧滑栏-->
+<div class="mc-drawer mdui-drawer" id="dra-main">
+    <div class="mdui-appbar">
+  <div class="mdui-toolbar mdui-color-theme">
+      <h3 class="headline">drawer</h3>
+    <div class="mdui-toolbar-spacer"></div>
+    <a mdui-drawer-close onclick="dra.close('dra-main')" class="mdui-btn mdui-btn-icon">
+      <i class="mdui-icon material-icons">close</i>
+    </a>
+  </div>
+</div>
+<div class="mdui-card mdui-ripple" style="border-radius:0px;width:102%;height:160px;position:relative;top:-1px;left:-1px" mdui-drawer-close onclick="tologin(
+<? echo $_COOKIE['login']; ?>
+)">
+  <div class="mdui-card-media">
+    <img src="./img/drawer_bg.png" height="160px"/>
+    <div class="mdui-card-media-covered mdui-card-media-covered-transparent mdui-card-media-covered-gradient">
+      <div class="mdui-card-primary">
+        <div class="mdui-card-primary-title">
+            <? echo $user; ?>
+        </div>
+        <div class="mdui-card-primary-subtitle">
+            <? echo $tip; ?>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <ul class="mdui-list">
+      <li class="mdui-list-item mdui-ripple">
+        <i class="mdui-list-item-icon mdui-icon material-icons">move_to_inbox</i>
+        <div class="mdui-list-item-content">开发中</div>
+      </li>
+      <li class="mdui-list-item mdui-ripple">
+        <i class="mdui-list-item-icon mdui-icon material-icons">star</i>
+        <div class="mdui-list-item-content">尽请期待</div>
+      </li>
+      <li class="mdui-subheader">开发中</li>
+      <li class="mdui-list-item mdui-ripple" mdui-drawer-close onclick="dia.open('dia-fk')">
+        <i class="mdui-list-item-icon mdui-icon material-icons">email</i>
+        <div class="mdui-list-item-content">反馈</div>
+      </li>
+    </ul>
+  </div>
+
+    <div id="tab-home" class="tab" style="margin:0px">
+        <div id="page-index">
+    <div class="banner">
+        <h1>TheChuan<strong>1503</strong></h1>
+        <div class="meta"><s>废物</s>安卓开发者</div>
+
+</div>
+    </div>
+    <h2 center>项目</h2>
+    <div class="mdui-card card mdui-ripple card-browatch" onclick="gotoitem('browatch')">
+        <div class="cardimg" style="height:100%">
+            <img src="./img/browatch/ic_launcher.png" height="100%">
+        </div>
+        <div class="cardd">
+            <h2 class="cardtitle">Browatch</h2>
+            &nbsp;·&nbsp;
+            <span class="cardp">手表浏览器</span>
+        </div>
+
+    </div>
+    </div>
+
+    
+    <div class="mdui-bottom-nav">
+  <a onclick="tab_dis('tab-home')" class="mdui-ripple mdui-bottom-nav-active">
+    <i class="mdui-icon material-icons">home</i>
+    <label>主页</label>
+  </a>
+
+</div>
+    
+    
+    
+
+  
+      <!--反馈对话框-->
+    <div class="mdui-dialog" id="dia-fk">
+  <div class="mdui-dialog-title">反馈(没用)</div>
+  <div class="mdui-dialog-content">您的联系方式
+  <input class="mdui-textfield-input" id="fk_lxfs"/>
+  <br>
+  反馈内容
+  <input class="mdui-textfield-input" id="fk_nr"/>
+  </div>
+  <div class="mdui-dialog-actions">
+    <a class="mdui-btn mdui-ripple" mdui-dialog-close>取消</a>
+    <button onclick="fk()" class="mdui-btn mdui-ripple" mdui-dialog-close>提交</button>
+  </div>
+</div>
+
+      <!--runjs对话框-->
+    <div class="mdui-dialog" id="runjs">
+  <div class="mdui-dialog-title">JS调试</div>
+  <div class="mdui-dialog-content">输入JS代码
+  <textarea class="mdui-textfield-input" id="jsdm"></textarea>
+  </div>
+  <div class="mdui-dialog-actions">
+    <a class="mdui-btn mdui-ripple" mdui-dialog-close>取消</a>
+    <button onclick="runjs()" class="mdui-btn mdui-ripple" mdui-dialog-close>提交</button>
+  </div>
+</div>
+  
     <!-- MDUI JavaScript -->
+    <script src="./js/script1.js"></script>
     <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
-  </body>
+    
+    <script src="https://cdn.w3cbus.com/mdui.org/static/theme/material/index.e38e6c48.js"></script>
+</body>
 </html>
+
+<script>
+    <? echo file_get_contents('./js/script1.js'); ?>
+</script>
