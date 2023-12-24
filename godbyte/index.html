@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no"/>
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+    <!-- MDUI CSS -->
+    <link rel="stylesheet" href="../mdui/css/mdui.min.css"/>
+    <title>TheChuan1503 × Godbyte Client</title>
+    <style>
+        .header{
+            background:#FF8774;
+            width:100%;
+            text-align:center;
+            height:48px;
+            position:fixed;
+            top:0px;
+        }
+        .header-title{
+            padding-top:4px;
+            font-size:24px;
+            color:black;
+            display:block;
+        }
+        .con{
+            padding:8px;
+        }
+        .top{
+            text-align:center;
+            margin-bottom:20px;
+        }
+        body{
+            padding-top:48px;
+            background:#ECFCFF;
+        }
+        .top-title{
+            margin-top:4px;
+            font-size:32px;
+            display:block;
+        }
+    </style>
+  </head>
+  <body>
+        <div class="header">
+            <span class="header-title">
+                Godbyte Client
+            </span>
+            <span id="clock">
+                0:0:0
+            </span>
+        </div>
+        <div class="con">
+            <div class="top">
+                <img src="ui_icon.png" width="80px">
+                <span class="top-title">
+                    衣不如新，人不如故
+                </span>
+            </div>
+            <hr>
+        </div>
+
+    <!-- MDUI JavaScript -->
+    <script src="../mdui/js/mdui.min.js"></script>
+    <script>
+        function  getD1(){
+         var date=new Date();
+         var d1=date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+         document.getElementById("clock").innerHTML =d1; 
+     }
+ 
+     setInterval("getD1();",200);
+    </script>
+  </body>
+</html>
