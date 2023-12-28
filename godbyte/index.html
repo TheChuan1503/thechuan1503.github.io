@@ -11,11 +11,23 @@
     <link rel="stylesheet" href="../mdui/css/mdui.min.css"/>
     <title>TheChuan1503 × Godbyte Client</title>
     <style>
+        @font-face {
+  font-family: "font";
+  src: url("font.ttf");
+}
+        *{
+            font-family: "font", "Bitstream Vera Serif", serif;
+            user-select:none;
+        }
+        @font-face {
+  font-family: "titleFont";
+  src: url("Fuyana.ttf");
+}
         .header{
             background:#FF8774;
             width:100%;
             text-align:center;
-            height:48px;
+            height:56px;
             position:fixed;
             top:0px;
         }
@@ -24,6 +36,7 @@
             font-size:24px;
             color:black;
             display:block;
+            font-family: "titleFont", "Bitstream Vera Serif", serif;
         }
         .con{
             padding:8px;
@@ -33,20 +46,89 @@
             margin-bottom:20px;
         }
         body{
-            padding-top:48px;
+            padding-top:60px;
             background:#ECFCFF;
         }
         .top-title{
             margin-top:4px;
-            font-size:32px;
+            font-size:28px;
             display:block;
+        }
+        .btn{
+            background-image:linear-gradient(to right, #FF8A93 , #FF9B83);
+            color:white;
+            border-radius: 12px;
+            padding:12px;
+            box-sizing: border-box;
+            font-size:20px;
+            text-align:center;
+        }
+        [disabled]{
+            filter: grayscale(1);
+        }
+        .btn ~ .btn{
+            margin-top:12px;
+        }
+        .start{
+            margin-top:12px;
+            margin-bottom:12px;
+            padding:0px 24px 0px 24px;
+        }
+        #clock{
+            font-size:16px;
+        }
+        .start-2{
+            margin-left:16px;
+            
+        }
+        .aulist > li > div{
+            font-family: "titleFont", "Bitstream Vera Serif", serif;
+        }
+        .coming{
+            font-size:20px;
+            text-align:center;
+            margin:8px;
+        }
+        #ads{
+            position:fixed;
+            width:100%;
+            height:100%;
+        }
+        .ad{
+            position:fixed;
+            width:200px;
+            height:136px;
+            background:#ccc;
+            text-align:center;
+            line-height:136px;
+        }
+        .ad > button{
+            position:absolute;
+            top:0px;
+            right:0px;
+            font-size:10px;
+        }
+        .ad > span{
+            position:absolute;
+            top:0px;
+            left:0px;
+            background:#DDD;
+            font-size:10px;
+            padding:1px;
+            height:16px;
+            color:#888;
+            line-height:16px;
+        }
+        #ad1{
+            bottom:0px;
+            right:0px;
         }
     </style>
   </head>
   <body>
         <div class="header">
             <span class="header-title">
-                Godbyte Client
+                Godbyte Index
             </span>
             <span id="clock">
                 0:0:0
@@ -56,19 +138,93 @@
             <div class="top">
                 <img src="ui_icon.png" width="80px">
                 <span class="top-title">
-                    衣不如新，人不如故
+                    茕茕白兔，东走西顾
                 </span>
             </div>
             <hr>
+            <div class="start">
+                <div class="coming">
+                    <span>Coming January 18, 2024</span>
+                    <br>
+                    <span>尽请期待！</span>
+                </div>
+                <a onclick=".zp();" class="mdui-btn-block btn mdui-btn-raised mdui-ripple" disabled>
+                    下载 Godbyte
+                </a>
+            </div>
+            <hr>
+            <div class="start">
+                <ul class="mdui-list">
+  <li onclick="openurl('http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=7spklDmLnposJOKxxHL2Q8r2bwTA34lX&authKey=YPDyeoGSi%2F56yg2deWZkBvIJk5E2CHteHSpb34%2FbJG%2BNMOnfV19xvXv%2FzgJCPKW0&noverify=0&group_code=602194158')" class="mdui-list-item">
+    <div class="mdui-list-item-content">加群</div>
+    <i class="mdui-list-item-icon mdui-icon material-icons">arrow_forward</i>
+  </li>
+</ul>
+            </div>
+            <hr>
+            <div class="start start-2">
+                <h4>Made by</h3>
+                <ul class="mdui-list aulist">
+  <li class="mdui-list-item" onclick="openurl('https://b23.tv/19yGHew')">
+    <div class="mdui-list-item-avatar">
+      <img src="Authors/Fuyana.png"/>
+    </div>
+    <div class="mdui-list-item-content">Fuyana</div>
+    <i class="mdui-list-item-icon mdui-icon material-icons">arrow_forward</i>
+  </li>
+  <li class="mdui-list-item" onclick="openurl('https://b23.tv/FL3ak1l')">
+    <div class="mdui-list-item-avatar">
+      <img src="Authors/L_Hiro.png"/>
+    </div>
+    <div class="mdui-list-item-content">L_Hiro</div>
+    <i class="mdui-list-item-icon mdui-icon material-icons">arrow_forward</i>
+  </li>
+  <li class="mdui-list-item" onclick="openurl('http://thechuan1503.github.io/godbyte')">
+    <div class="mdui-list-item-avatar">
+      <img src="Authors/TheChuan1503.png"/>
+    </div>
+    <div class="mdui-list-item-content">TheChuan1503</div>
+    <i class="mdui-list-item-icon mdui-icon material-icons">arrow_forward</i>
+  </li>
+</ul>
+            </div>
+            <div class="start start-2">
+                <h4>Toolbox info</h4>
+                <p>尽请期待</p>
+            </div>
         </div>
+    <div id="ads">
+        <div id="ad1" class="ad">
+            广告位招租
+            
+        </div>
+        
+    </div>
 
     <!-- MDUI JavaScript -->
     <script src="../mdui/js/mdui.min.js"></script>
     <script>
+        var ads=document.getElementsByClassName("ad")
+        for(var i=0;i<ads.length;i++){
+            ads[i].innerHTML=ads[i].innerHTML+`
+<span>广告</span>
+<button onclick="closead(this)">关闭</button>
+`
+        }
+        function closead(e){
+            e=e.parentNode;
+            e.style.display="none"
+        }
         function  getD1(){
          var date=new Date();
          var d1=date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
          document.getElementById("clock").innerHTML =d1; 
+     }
+     function zp(){
+         window.open("https://baike.baidu.com/video?collectionId=0&from=lemma&fromIndex=0&fromModule=lemma_top&fromPage=lemmaTop&isSensitive=0&lemmaId=1719254&secondId=47297426")
+     }
+     function openurl(a){
+         window.open(a)
      }
  
      setInterval("getD1();",200);
