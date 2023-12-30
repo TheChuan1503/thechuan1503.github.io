@@ -9,14 +9,17 @@
 
     <!-- MDUI CSS -->
     <link rel="stylesheet" href="../mdui/css/mdui.min.css"/>
-    <title>TheChuan1503 × Godbyte Client</title>
+    <link rel="icon" href="ui_icon.png" sizes="32x32">
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery
+/jquery-1.4.min.js"></script>
+    <title>Godbyte Index</title>
     <style>
         @font-face {
   font-family: "font";
   src: url("font.ttf");
 }
         *{
-            font-family: "font", "Bitstream Vera Serif", serif;
+            font-family: "font";
             user-select:none;
         }
         @font-face {
@@ -30,13 +33,17 @@
             height:56px;
             position:fixed;
             top:0px;
+            overflow:hidden;
         }
         .header-title{
             padding-top:4px;
             font-size:24px;
             color:black;
+            position:fixed;
+            width:100%;
             display:block;
-            font-family: "titleFont", "Bitstream Vera Serif", serif;
+            font-family: "titleFont";
+            z-index:100;
         }
         .con{
             padding:8px;
@@ -76,13 +83,18 @@
         }
         #clock{
             font-size:16px;
+            position:absolute;
+            width:100%;
+            bottom:4px;
+            left:0;
+            z-index:99;
         }
         .start-2{
             margin-left:16px;
             
         }
         .aulist > li > div{
-            font-family: "titleFont", "Bitstream Vera Serif", serif;
+            font-family: "titleFont";
         }
         .coming{
             font-size:20px;
@@ -122,22 +134,85 @@
         #ad1{
             bottom:0px;
             right:0px;
+            background-image:url('img/ads/toolbox_tc.jpg');
+            background-position: center center;
+    /* 背景图不平铺 */
+    background-repeat: no-repeat;
+    /* 当内容高度大于图片高度时，背景图像的位置相对于viewport固定 */
+    /*background-attachment: fixed;
+    /* 设置背景颜色，背景图加载过程中会显示背景色 */
+    background-color: #464646;
+    background-size: 100% auto;
         }
+.wave {
+    position: relative;
+    z-index:1;
+}
+
+.wave div {
+    position     : absolute;
+    top          : 200px;
+    left         : 50%;
+    width        : 1000px;
+    height       : 500px;
+    z-index:50;
+    margin-left  : -500px;
+    border-radius: 20%;
+}
+
+.w1 {
+    background: #FF6863;
+    z-index:50;
+    opacity   : 0.4;
+    animation : drift 8s infinite linear;
+}
+
+.w2 {
+    background: #FF8A93;
+    opacity   : 0.6;
+    z-index:50;
+    animation : drift 12s infinite linear;
+}
+
+.w3 {
+    background: #FF7973;
+    opacity   : 0.4;
+    z-index:50;
+    animation : drift 10s infinite linear;
+}
+
+@keyframes drift {
+    from {
+        -webkit-transform: rotate(0deg);
+        transform        : rotate(0deg);
+    }
+
+    from {
+        -webkit-transform: rotate(360deg);
+        transform        : rotate(360deg);
+    }
+}
     </style>
   </head>
   <body>
         <div class="header">
+            <div class="wave">
+            <div class="w1"></div>
+            <div class="w2"></div>
+            <div class="w3"></div>
+        </div>
             <span class="header-title">
                 Godbyte Index
             </span>
             <span id="clock">
-                0:0:0
+                00:00:00
             </span>
+            
         </div>
         <div class="con">
             <div class="top">
                 <img src="ui_icon.png" width="80px">
-                <span class="top-title">
+                <span class="top-title" id="poem">
                     茕茕白兔，东走西顾
                 </span>
             </div>
@@ -149,13 +224,13 @@
                     <span>尽请期待！</span>
                 </div>
                 <a onclick=".zp();" class="mdui-btn-block btn mdui-btn-raised mdui-ripple" disabled>
-                    下载 Godbyte
+                    获取 Godbyte Client
                 </a>
             </div>
             <hr>
             <div class="start">
                 <ul class="mdui-list">
-  <li onclick="openurl('http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=7spklDmLnposJOKxxHL2Q8r2bwTA34lX&authKey=YPDyeoGSi%2F56yg2deWZkBvIJk5E2CHteHSpb34%2FbJG%2BNMOnfV19xvXv%2FzgJCPKW0&noverify=0&group_code=602194158')" class="mdui-list-item">
+  <li onclick="hurl('http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=7spklDmLnposJOKxxHL2Q8r2bwTA34lX&authKey=YPDyeoGSi%2F56yg2deWZkBvIJk5E2CHteHSpb34%2FbJG%2BNMOnfV19xvXv%2FzgJCPKW0&noverify=0&group_code=602194158')" class="mdui-list-item">
     <div class="mdui-list-item-content">加群</div>
     <i class="mdui-list-item-icon mdui-icon material-icons">arrow_forward</i>
   </li>
@@ -165,21 +240,21 @@
             <div class="start start-2">
                 <h4>Made by</h3>
                 <ul class="mdui-list aulist">
-  <li class="mdui-list-item" onclick="openurl('https://b23.tv/19yGHew')">
+  <li class="mdui-list-item" onclick="openurl('https://b23.tv/19yGHew')" mdui-tooltip="{content: '群主 | 启动页大部分内容 | 设计UI结构 | 图标', position: 'top'}">
     <div class="mdui-list-item-avatar">
       <img src="Authors/Fuyana.png"/>
     </div>
     <div class="mdui-list-item-content">Fuyana</div>
     <i class="mdui-list-item-icon mdui-icon material-icons">arrow_forward</i>
   </li>
-  <li class="mdui-list-item" onclick="openurl('https://b23.tv/FL3ak1l')">
+  <li class="mdui-list-item" onclick="openurl('https://b23.tv/FL3ak1l')" mdui-tooltip="{content: 'UI细节 | 部分代码 | 无限加时', position: 'top'}">
     <div class="mdui-list-item-avatar">
       <img src="Authors/L_Hiro.png"/>
     </div>
     <div class="mdui-list-item-content">L_Hiro</div>
     <i class="mdui-list-item-icon mdui-icon material-icons">arrow_forward</i>
   </li>
-  <li class="mdui-list-item" onclick="openurl('http://thechuan1503.github.io/godbyte')">
+  <li class="mdui-list-item" onclick="openurl('http://thechuan1503.github.io/godbyte')" mdui-tooltip="{content: '本页面 | 大体UI | 启动页部分内容', position: 'top'}">
     <div class="mdui-list-item-avatar">
       <img src="Authors/TheChuan1503.png"/>
     </div>
@@ -194,17 +269,44 @@
             </div>
         </div>
     <div id="ads">
-        <div id="ad1" class="ad">
-            广告位招租
+        <div onclick="hurl('http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=2P4AFgfxKe5lr3LnxYcQ9t3XCqSgnmof&authKey=S%2Bwq%2F6wYaPVcQDbVuIXbgRIY4YSa9i%2F98S7O5hesw7FNxq4WYuuXj7%2B6dHy1mO0w&noverify=0&group_code=271581129')" id="ad1" class="ad">
             
         </div>
         
     </div>
-
+    <iframe id="hurl" frameborder="0" width="0" height="0"></iframe>
     <!-- MDUI JavaScript -->
     <script src="../mdui/js/mdui.min.js"></script>
     <script>
+        $("#clock").click(function(){
+            reloadpoem()
+});
+        var npoem=0
+        var poems=[
+            "茕茕白兔，东走西顾",
+            "人不如新，衣不如故",
+            "关关雎鸠，在河之洲",
+            "孟冬十月，北风徘徊",
+            "执子之手，与子偕老",
+            "桃之夭夭，灼灼其华"
+        ]
         var ads=document.getElementsByClassName("ad")
+        function formatDate(str) {
+  // 根据 - 符号拆分
+  return str
+    .split(":")
+    .map((item) => {
+      // +item 将item字符串转换为数字
+      // 小于10的时候就补全一个前缀0
+      if (+item < 10) {
+        return "0" + +item;
+      }
+
+      // 大于10的时候不用补0
+      return item;
+    })
+    .join(":"); // 最后重组回来
+}
         for(var i=0;i<ads.length;i++){
             ads[i].innerHTML=ads[i].innerHTML+`
 <span>广告</span>
@@ -215,19 +317,35 @@
             e=e.parentNode;
             e.style.display="none"
         }
-        function  getD1(){
+        function getD1(){
          var date=new Date();
          var d1=date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
-         document.getElementById("clock").innerHTML =d1; 
-     }
-     function zp(){
+         document.getElementById("clock").innerHTML =formatDate(d1); 
+        }
+        getD1()
+        function zp(){
          window.open("https://baike.baidu.com/video?collectionId=0&from=lemma&fromIndex=0&fromModule=lemma_top&fromPage=lemmaTop&isSensitive=0&lemmaId=1719254&secondId=47297426")
-     }
-     function openurl(a){
-         window.open(a)
-     }
- 
-     setInterval("getD1();",200);
+        }
+        function openurl(a){
+          window.open(a)
+        }
+        function hurl(a){
+          document.getElementById("hurl").src=a
+        }
+        function reloadpoem(){
+            var p=$("#poem")
+            p.fadeOut(500)
+            if(npoem<poems.length-1){
+                npoem++
+            }
+            else npoem=0
+            setTimeout(function(){
+                p.html(poems[npoem])
+            },500)
+            p.fadeIn(500)
+        }
+        setInterval("getD1();",100);
+        setInterval("reloadpoem();",5000);
     </script>
   </body>
 </html>
