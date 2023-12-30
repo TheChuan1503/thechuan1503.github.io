@@ -56,7 +56,13 @@ else{
             float:left;
         }
         .card-browatch{
-            background: linear-gradient(to right, black, teal);
+            background: linear-gradient(to right, #25c, teal);
+        }
+        .card-toolbox_tc{
+            background: linear-gradient(to right, #00BCD4, teal);
+        }
+        .card-godbyte{
+            background: linear-gradient(to right, #FF8A93, #FF9B83);
         }
         .cardtitle,
         .cardp,
@@ -66,6 +72,7 @@ else{
         }
         .cardtitle{
             line-height:56px;
+            margin-left:4px;
         }
     </style>
 </head>
@@ -150,6 +157,28 @@ mdui-bottom-nav-fixed">
             <h2 class="cardtitle">Browatch</h2>
             &nbsp;·&nbsp;
             <span class="cardp">手表浏览器</span>
+        </div>
+
+    </div>
+    <div class="mdui-card card mdui-ripple card-toolbox_tc" onclick="gotoitem('toolbox_tc')">
+        <div class="cardimg" style="height:100%">
+            <img src="./img/toolbox_tc/ic.png" height="100%">
+        </div>
+        <div class="cardd">
+            <h2 class="cardtitle">Toolbox TC</h2>
+            &nbsp;·&nbsp;
+            <span class="cardp">[二改]MCBE辅助器</span>
+        </div>
+
+    </div>
+    <div class="mdui-card card mdui-ripple card-godbyte" onclick="gotoitem('godbyte')">
+        <div class="cardimg" style="height:100%">
+            <img src="godbyte/ui_icon.png" height="100%">
+        </div>
+        <div class="cardd">
+            <h2 class="cardtitle">Godbyte Client</h2>
+            &nbsp;·&nbsp;
+            <span class="cardp">[联合创作|二改]MCBE辅助器</span>
         </div>
 
     </div>

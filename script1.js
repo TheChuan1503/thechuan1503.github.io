@@ -49,6 +49,12 @@ function gotoitem(item){
         case "browatch":
             loadurl("https://www.123pan.com/s/zaQKVv-EulK3.html");
             break;
+        case "toolbox_tc":
+            loadurl("https://www.123pan.com/s/zaQKVv-Bi7K3.html");
+            break;
+        case "godbyte":
+            loadurl("godbyte");
+            break;
     }
 }
 
