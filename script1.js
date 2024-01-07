@@ -55,6 +55,9 @@ function gotoitem(item){
         case "godbyte":
             loadurl("godbyte");
             break;
+        case "ph":
+            loadurl("ph");
+            break;
     }
 }
 
