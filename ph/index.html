@@ -1,0 +1,890 @@
+
+<!doctype html>
+<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2.0.1/mdui.css">
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <script src="https://unpkg.com/mdui@2.0.1/mdui.global.js"></script>
+
+    <title>ProtoHax</title>
+    <style>
+        body {
+            user-select:none;
+        }
+            #tab-2{
+                display:none;
+            }
+            #tab-3{
+                display:none;
+            }
+            #pre-load{
+                background: linear-gradient( black, #222);
+            }
+    </style>
+
+
+</head>
+<div id="pre-load" style="position:fixed;z-index:99999;width:100%;height:100%;left:0px;top:0px"></div>
+<body style="padding:48px 24px 0 24px;background-color: rgb(var(--mdui-color-white));">
+
+
+
+
+
+    <div id="tab-1">
+        <mdui-top-app-bar style="position: fixed;">
+            <div style="flex-grow: 1"></div>
+
+            <ul class="mdui-menu" id="仪表盘菜单">
+                <li class="mdui-menu-item">
+                    <a onclick="仪表盘菜单()" class="mdui-ripple">关于</a>
+                </li>
+            </ul>
+
+
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-menu="{target: '#仪表盘菜单'}">
+                <i class="mdui-icon material-icons">more_vert</i>
+            </button>
+        </mdui-top-app-bar>
+
+        <span style="font-size:32px; margin:32px 0 24px 0;display:block">
+            ProtoHax
+        </span>
+
+        <mdui-card clickable class="mdui-valign" onclick="document.querySelector('#acc-tab-btn').click()" style="width: 100%;height: 84px;padding:16px;background-color:#E9DEED;margin-bottom:24px" id="请登录">
+            <mdui-icon name="warning" style="color:#B2251C"></mdui-icon>
+            <span style="font-size:18px;margin-left:12px">
+                请登录 Microsoft 账户以连接 Xbox 认证伺服器
+            </span>
+        </mdui-card>
+
+
+        <mdui-card clickable onclick="对话框.打开('.应用程式')" style="width: 100%;height: 124px;padding:16px;background-color:#E9DEED">
+            <span style="font-size:18px">
+                已选择的应用程式</span>
+            <br>
+            <div>
+                <h3 style="margin: 8px 0 8px 0">
+                    <img id="应用程式-图标" src="https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/59/c8/4e/59c84e00-c450-97d4-be8a-2125eed2f73e/AppIcon-0-0-1x_U007emarketing-0-0-0-9-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/460x0w.png" width="24px" style="display:inline-block;vertical-align:middle;">
+                    <span id="应用程式-名称">Minecraft (com.mojang.minecraftpe)</span>
+                </h3>
+            </div>
+            <span style="font-size:16px;margin: 6px 0 6px 0">
+                当前:&nbsp;&nbsp;<span id="应用程式-版本">v1.20.32.03</span>
+            </span>
+            <br>
+            <span style="font-size:16px">
+                推荐:&nbsp;&nbsp;v1.20.0
+            </span>
+        </mdui-card>
+
+        <mdui-fab id="连接" onclick="vpn()" extended icon="router" style="
+    position:fixed;
+    right:24px;
+    bottom:108px;
+    width:108px
+    ">连接</mdui-fab>
+    </div>
+    <script>
+        function vpn(){
+        const dialog = document.querySelector(".vpn");
+          const openButton = dialog.nextElementSibling;
+          dialog.open = true
+        }
+    </script>
+
+
+    <div id="tab-2">
+        <mdui-top-app-bar style="position: fixed;">
+            <div style="flex-grow: 1"></div>
+            <button onclick="document.getElementById('filesel').click()" class="mdui-btn mdui-btn-icon mdui-ripple">
+                <i class="mdui-icon material-icons">insert_drive_file</i>
+            </button>
+            <input id="filesel" type="file" accept=".json" style="display:none" />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button onclick="对话框.打开('.新建配置')" class="mdui-btn mdui-btn-icon mdui-ripple">
+                <i class="mdui-icon material-icons">add</i>
+            </button>
+        </mdui-top-app-bar>
+
+        <span style="font-size:32px; margin:32px 0 24px 0;display:block">
+            配置
+        </span>
+
+        <mdui-list>
+            <mdui-list-item headline="The Hive 暴力配置">
+                <button id="pz1" onclick="pzmenu(1)" class="mdui-btn mdui-btn-icon mdui-ripple" slot="end-icon" mdui-menu="{target: '#pzmenu'}">
+                    <i class="mdui-icon material-icons">more_vert</i>
+                </button>
+            </mdui-list-item>
+        </mdui-list>
+
+
+        <ul class="mdui-menu" id="pzmenu">
+            <li class="mdui-menu-item">
+                <a href="javascript:;" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">content_copy</i>複制
+                </a>
+            </li>
+            <li class="mdui-menu-item">
+                <a href="javascript:;" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">edit</i>重命名
+                </a>
+            </li>
+            <li class="mdui-menu-item">
+                <a href="javascript:;" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">share</i>共享
+                </a>
+            </li>
+            <li class="mdui-menu-item">
+                <a href="javascript:;" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon">delete</i>删除
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+
+    <div id="tab-3">
+        <mdui-top-app-bar style="position: fixed;">
+            <div style="flex-grow: 1"></div>
+            <ul class="mdui-menu" style="width:14em" id="账户菜单">
+                <li class="mdui-menu-item">
+                    <a onclick="账户菜单()" class="mdui-ripple">以 Android 的身分登入</a>
+                </li>
+                <li class="mdui-menu-item">
+                    <a onclick="账户菜单()" class="mdui-ripple">以 IOS 的身分登入</a>
+                </li>
+                <li class="mdui-menu-item">
+                    <a onclick="账户菜单()" class="mdui-ripple">以 Nintendo 的身分登入</a>
+                </li>
+            </ul>
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-menu="{target: '#账户菜单'}">
+                <i class="mdui-icon material-icons">more_vert</i>
+            </button>
+        </mdui-top-app-bar>
+
+
+        <span style="font-size:32px; margin:32px 0 24px 0;display:block">
+            账户
+        </span>
+
+        <mdui-list>
+            <mdui-list-item id="zh1" onclick="zh()" headline="TheChuan1503" description="Android (已选择)">
+                <button class="mdui-btn mdui-btn-icon mdui-ripple" slot="end-icon">
+                    <i class="mdui-icon material-icons">more_vert</i>
+                </button>
+            </mdui-list-item>
+        </mdui-list>
+    </div>
+
+
+
+    <div id="tab-4">
+        <mdui-top-app-bar style="position: fixed;">
+            <div style="flex-grow: 1"></div>
+        </mdui-top-app-bar>
+
+        <span style="font-size:32px; margin:32px 0 24px 0;display:block">
+            设定
+        </span>
+
+        <mdui-list>
+            <mdui-list-item headline="离线模式覆写" description="允许离线模式加密">
+                <mdui-switch id="设定-1-开关" onclick="保存设定(1)" slot="end-icon" checked-icon=""></mdui-switch>
+            </mdui-list-item>
+            <mdui-list-item headline="命令" description="允许使用命令在游戏中控制ProtoHax">
+                <mdui-switch id="设定-2-开关" onclick="保存设定(2)" checked slot="end-icon" checked-icon=""></mdui-switch>
+            </mdui-list-item>
+            <mdui-list-item headline="RakNet 可靠性" description="关闭以禁用RakNet的HoL阻塞，会导致数据包混乱，但会提高延迟">
+                <mdui-switch id="设定-3-开关" onclick="保存设定(3)" checked slot="end-icon" checked-icon=""></mdui-switch>
+            </mdui-list-item>
+            <mdui-list-item headline="中文模式" description="开启中文模式">
+                <mdui-switch id="设定-4-开关" onclick="保存设定(4)" slot="end-icon" disabled checked-icon=""></mdui-switch>
+            </mdui-list-item>
+            <mdui-list-item headline="信任点击" description="执行'adb shell settings put global
+block_untrusted_touches 0'以通过叠加层信任点击">
+                <mdui-switch id="设定-5-开关" onclick="保存设定(5)" slot="end-icon" checked-icon=""></mdui-switch>
+            </mdui-list-item>
+            <ul class="mdui-menu" id="ipv6菜单">
+                <li class="mdui-menu-item">
+                    <a onclick="ipv6菜单('自动')" class="mdui-ripple">自动</a>
+                </li>
+                <li class="mdui-menu-item">
+                    <a onclick="ipv6菜单('已启用')" class="mdui-ripple">已启用</a>
+                </li>
+                <li class="mdui-menu-item">
+                    <a onclick="ipv6菜单('已禁用')" class="mdui-ripple">已禁用</a>
+                </li>
+                <li class="mdui-menu-item">
+                    <a onclick="ipv6菜单('仅IPv6')" class="mdui-ripple">仅IPv6</a>
+                </li>
+            </ul>
+            <mdui-list-item mdui-menu="{target: '#ipv6菜单'}" id="ipv6" headline="IPv6" description="自动">
+            </mdui-list-item>
+            <mdui-list-item onclick="对话框.打开('.日志')" headline="日志" description="显示日志">
+
+            </mdui-list-item>
+        </mdui-list>
+    </div>
+
+
+
+
+    <script>
+        ntab=0;
+        var tabfadet=200
+            function 切换(tab){
+                if(ntab!=tab){
+                    $("#tab-"+ntab).stop();
+                    $("#tab-"+tab).stop();
+                    //$("#tab-"+ntab).fadeOut(tabfadet);
+                    $("#tab-"+ntab).animate({
+                        margin:'48px 16px 48px 16px',
+                        opacity:'0.001'
+                    },tabfadet);
+                    //$("#tab-"+ntab).fadeOut(tabfadet);
+                    //$("#tab-"+tab).fadeIn(tabfadet);
+                    $("#tab-"+tab).animate({
+                        margin:'0px',
+                        opacity:'1'
+                    },tabfadet);
+                    //$("#tab-"+tab).fadeIn(tabfadet);
+                    
+                ntab=tab
+                
+            for(var i=1;i<=4;i++){
+            document.getElementById('tab-'+i).style.display="none";
+            }
+            document.getElementById('tab-'+tab).style.display="block";
+        }
+        }
+        
+        切换(4)
+        切换(3)
+        切换(2)
+        切换(1)
+        
+        document.getElementsByTagName('html')[0].style["background-color"]="#FFFFFF"
+        
+        for(var i=0;i<document.getElementsByTagName('mdui-top-app-bar').length;i++){
+            document.getElementsByTagName('mdui-top-app-bar')[i].style["background-color"]="#FFFFFF"
+        }
+        document.getElementById('home-tab-btn').click();
+    </script>
+
+
+
+
+
+    <mdui-navigation-bar value="item-1" style="position: fixed" label-visibility="selected">
+        <mdui-navigation-bar-item icon="home" value="item-1" onclick="切换(1)" id="home-tab-btn">仪表板</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="description" value="item-2" onclick="切换(2)">配置</mdui-navigation-bar-item>
+        <!--feed-->
+        <mdui-navigation-bar-item icon="people" value="item-3" onclick="切换(3)" id="acc-tab-btn">账户</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="settings" value="item-4" onclick="切换(4)">设定</mdui-navigation-bar-item>
+    </mdui-navigation-bar>
+    <script>
+        document.getElementById('home-tab-btn').click();
+    </script>
+
+
+
+    <mdui-dialog close-on-overlay-click class="vpn">
+        <span slot="headline">网络连接请求</span>
+        <span slot="description">ProtoHax想要设置一个VPN连接（可被用于监控网络流量）。请只在您信任该来源的情况下才接受。在VPN处于活动状态时，您的屏幕顶部会显示 <i class="mdui-icon material-icons">vpn_key</i> 图标</span>
+        <mdui-button onclick="vpnc()" slot="action" variant="text">确定</mdui-button>
+    </mdui-dialog>
+
+    <mdui-dialog class="game">
+        <span slot="headline" id="tzyx">Minecraft 已停止运行</span>
+        <span slot="description">
+        </span>
+        <mdui-button id="cxdk" onclick="gamec();startgame()" slot="action" variant="text">重新打开</mdui-button>
+        <mdui-button onclick="gamec()" slot="action" variant="text">确定</mdui-button>
+    </mdui-dialog>
+
+    <mdui-dialog close-on-overlay-click class="仪表盘菜单" style="padding:24px;">
+
+        <div class="mdui-center mdui-valign" style="background-color:#3D9ADC;border-radius:25%;height:108px;width:108px">
+            <mdui-icon style="font-size:72px;color:white" class="mdui-center" name="router"></mdui-icon>
+        </div>
+
+        <span class="mdui-center" style="font-size:24px;text-align:center;margin-top:16px">ProtoHax</span>
+
+        <p class="mdui-center" style="text-align:center;margin-top:16px">1.4.1 (Beta 1)</p>
+
+        <p class="mdui-center" style="text-align:center;margin-top:16px">
+            根据 <a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank">GPLv3</a> 的许可证
+            <br>
+            在 <a href="https://github.com/hax0r31337/ProtoHax" target="_blank">GitHub</a> 上查看我们的原始码
+        </p>
+        <p class="mdui-center" style="text-align:center;margin-top:16px">
+            ProtoHax网页版<br>
+            Made By TheChuan1503
+        </p>
+
+    </mdui-dialog>
+
+    <mdui-dialog class="新建配置">
+        <span slot="headline">新建设定</span>
+        <span slot="description">
+            <mdui-text-field clearable label="新建设定" value=""></mdui-text-field>
+        </span>
+        <mdui-button onclick="对话框.关闭('.新建配置')" slot="action" variant="text">取消</mdui-button>
+        <mdui-button onclick="对话框.关闭('.新建配置')" slot="action" variant="text">确定</mdui-button>
+    </mdui-dialog>
+
+    <mdui-dialog class="应用程式" fullscreen>
+        <div slot="header">
+            <mdui-button-icon onclick="对话框.关闭('.应用程式')" icon="arrow_back"></mdui-button-icon>
+            <span class="mdui-center" style="font-size:22px;position:fixed;top:32px;left:72px;width:100%;pointer-events: none;">选择应用程式</span>
+        </div>
+        <mdui-text-field variant="outlined" icon="search" style="background-color:#E9DEED" label="选择应用程式" id="应用程式搜索"></mdui-text-field>
+
+        <mdui-list id="应用程式列表">
+            <mdui-list-item onclick="选择应用程式('minecraft')" headline="Minecraft" description="com.mojang.minecraftpe">
+                <mdui-avatar slot="icon" src="https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/59/c8/4e/59c84e00-c450-97d4-be8a-2125eed2f73e/AppIcon-0-0-1x_U007emarketing-0-0-0-9-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/460x0w.png"></mdui-avatar>
+            </mdui-list-item>
+            <mdui-list-item onclick="选择应用程式('protohax')" headline="ProtoHax" description="dev.sora.protohax">
+                <mdui-avatar slot="icon" src="img/protohax.png"></mdui-avatar>
+            </mdui-list-item>
+        </mdui-list>
+    </mdui-dialog>
+
+
+
+    <mdui-dialog class="日志" fullscreen>
+        <div slot="header">
+            <mdui-button-icon onclick="对话框.关闭('.日志')" icon="arrow_back" style="display:inline-block"></mdui-button-icon>
+            <span class="mdui-center" style="font-size:22px;position:fixed;top:32px;left:72px;width:100%;pointer-events: none;">日志</span>
+
+            <mdui-button-icon style="display:inline-block" class="mdui-float-right" icon="clear_all"></mdui-button-icon>
+            <mdui-button-icon style="display:inline-block" class="mdui-float-right" onclick="对话框.关闭('.日志');对话框.打开('.分享')" icon="share"></mdui-button-icon>
+        </div>
+    </mdui-dialog>
+
+
+
+
+
+
+
+
+
+
+    <mdui-snackbar action="启动应用程式" class="startsb">已连接到 MITM 代理</mdui-snackbar>
+
+    <mdui-snackbar class="stopsb">已从 MITM 代理断开连接</mdui-snackbar>
+
+
+
+
+
+
+    <mdui-navigation-drawer close-on-overlay-click class="分享" style="width:100%;height:50%;margin-top:120%">
+        <h2 style="text-align:center">
+            分享到
+        </h2>
+        <mdui-button full-width onclick="对话框.关闭('.分享');分享()" style="margin:0 16px 0 16px">其他</mdui-button>
+    </mdui-navigation-drawer>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+<script>
+    var 对话框={
+        打开:function(id){
+            const dialog = document.querySelector(id);
+            dialog.open = true
+        },
+        关闭:function(id){
+            const dialog = document.querySelector(id);
+            dialog.open = false
+        }
+    }
+    function vpnc(){
+        const button = document.querySelector('#连接');
+    
+      // 修改 HTML 属性
+      button.setAttribute('variant', "tertiary");
+      button.style.width= "144px";
+      button.innerHTML="断开连接"
+        const dialog = document.querySelector(".vpn")
+      dialog.open = false
+      button.setAttribute('onclick', "stop()");
+      sb()
+    }
+    function game(){
+        const dialog = document.querySelector(".game");
+      const openButton = dialog.nextElementSibling;
+      dialog.open = true
+    }
+    function gamec(){
+        
+        const tzyx = document.querySelector("#tzyx")
+        const cxdk = document.querySelector("#cxdk")
+        
+        const dialog = document.querySelector(".game")
+      dialog.open = false
+      setTimeout(function(){
+          tzyx.innerHTML=应用程式列表[当前应用程式].name+" 屡次停止运行"
+        cxdk.style.display="none"
+      },200)
+    }
+    function sb(){
+        const snackbar = document.querySelector(".startsb");
+      const openButton = snackbar.nextElementSibling;
+    
+      snackbar.addEventListener("action-click", () => {
+        startgame()
+      });
+    
+      snackbar.open = true
+      
+      document.getElementById("backToTop").setAttribute('class', "mdui-center mdui-valign");
+    }
+    function stop(){
+        const snackbar = document.querySelector(".stopsb");
+      const openButton = snackbar.nextElementSibling;
+      snackbar.open = true
+      const button = document.querySelector('#连接');
+      button.setAttribute('variant', "primary");
+      button.style.width="108px";
+      button.innerHTML="连接"
+      button.setAttribute('onclick', "vpn()");
+      document.getElementById("backToTop").setAttribute('class', "mdui-center mdui-valign mdui-hidden");
+    }
+    function startgame(){
+        if(当前应用程式=='protohax'){
+            return
+        }
+        const white = document.querySelector("#white");
+        white.style.display="block";
+        document.getElementsByTagName("html")[0].requestFullscreen();
+        setTimeout(function(){
+            document.exitFullscreen();
+            white.style.display="none";
+            game()
+        },1250)
+    }
+    function 仪表盘菜单(){
+        const dialog = document.querySelector(".仪表盘菜单");
+      const openButton = dialog.nextElementSibling;
+      dialog.open = true
+    }
+    function pzmenu(a){
+    var inst = new mdui.Menu('#pz'+a, '#pzmenu');
+      inst.open();
+    }
+    function ipv6菜单(item){
+        localStorage.setItem("IPv6",item);
+        document.querySelector("#ipv6").setAttribute('description', item);
+    }
+    var loginurl="login/"
+    function 账户菜单(){
+        const login = document.querySelector("#login");
+        login.style.display="block";
+        login.setAttribute('class', "mdui-valign");
+        const ifr = document.querySelector("#if");
+        ifr.src=loginurl
+        setTimeout(function(){
+            sl()
+        },3000)
+    }
+    const ifr = document.querySelector("#if");
+    function sl() {
+          const ifr = document.querySelector("#if");
+          ifr.src="about:blank";
+          ifr.setAttribute('class', "mdui-hidden");
+          ifr.style.display="none";
+          const slf = document.querySelector("#slf");
+          slf.style.displsy="block"
+          slf.setAttribute('class', "");
+          sl2()
+    }
+    function sl2(){
+        sl = document.querySelector("#sl");
+        setTimeout(function(){
+            sl.innerHTML="Still Loading (1/3)";
+            setTimeout(function(){
+                sl.innerHTML="Still Loading (2/3)";
+                    setTimeout(function(){
+                        sl3();
+                },5875)
+            },3250)
+        },1750)
+    }
+    function sl3(){
+        const login = document.querySelector("#login");
+        login.style.display="none";
+        login.setAttribute('class', "mdui-valign mdui-hidden");
+        sl = document.querySelector("#sl");
+        sl.innerHTML="Still Loading (0/3)";
+    }
+    function zh(){
+        if(localStorage.getItem("zh")==1){
+            document.querySelector("#zh1").setAttribute('description', "Android");
+            document.querySelector("#请登录").setAttribute('class', "mdui-valign");
+            localStorage.setItem("zh", 0);
+        }
+        else{
+            document.querySelector("#zh1").setAttribute('description', "Android (已选择)");
+            document.querySelector("#请登录").setAttribute('class', "mdui-hidden");
+            localStorage.setItem("zh", 1);
+        }
+    }
+    function 闪退(){
+        document.getElementById("backToTop").setAttribute('class', "mdui-hidden");
+        document.documentElement.setAttribute('style', "margin:1145px;background-color:black");
+        setTimeout(function(){
+            alert("ProtoHax 已停止运行");
+            window.location.reload()
+        },500)
+    }
+    function 应用程式(e){
+        var a = document.getElementById("应用程式搜索").value;
+        var b = document.getElementById("应用程式列表");
+        if("minecraft".indexOf(a.toLowerCase())==-1){
+            b.style.display="none"
+        }
+        else{
+            b.style.display="block"
+        }
+    }
+    function 分享(){
+        navigator.share({
+      title: "日志",
+      text: "",
+    });
+    }
+    function 切换功能(tab){
+        if(tab!=功能tab){
+        $("#功能-"+功能tab).fadeOut(100);
+        $("#功能-"+tab).fadeIn(100);
+        功能tab=tab
+        }
+    }
+    
+    var 应用程式列表={
+        minecraft:{
+            name:"Minecraft",
+            pkg:"com.mojang.minecraftpe",
+            version:"1.20.32.03",
+            icon:"https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/59/c8/4e/59c84e00-c450-97d4-be8a-2125eed2f73e/AppIcon-0-0-1x_U007emarketing-0-0-0-9-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/460x0w.png"
+        },
+        protohax:{
+            name:"ProtoHax",
+            pkg:"dev.sora.protohax",
+            version:"1.4.1",
+            icon:"img/protohax.png"
+        }
+    }
+    function 选择应用程式(app){
+        document.getElementById("应用程式-图标").src=应用程式列表[app].icon
+        document.getElementById("应用程式-名称").innerHTML=应用程式列表[app].name+" ("+应用程式列表[app].pkg+")"
+        document.getElementById("应用程式-版本").innerHTML="v"+应用程式列表[app].version
+        对话框.关闭(".应用程式")
+        document.getElementById("tzyx").innerHTML=应用程式列表[app].name+" 已停止运行"
+        当前应用程式=app
+        localStorage.setItem("当前应用程式",app)
+    }
+    function 保存设定(id){
+        localStorage.setItem('设定-'+id,!document.getElementById("设定-"+id+"-开关").checked)
+    }
+    
+    
+    
+    
+    const yycsss = document.getElementById("应用程式搜索")
+        yycsss.addEventListener("input", 应用程式,false);
+    
+    window.onload=function(){
+        document.getElementById("pre-load").style.display="none"
+    }
+    
+    
+    
+    
+    
+    
+</script>
+
+<div id="white" style="display:none;position:fixed;left:0px;top:0px;width:100%;height:100%;background-color:white;z-index:114514"></div>
+<div id="login" class="mdui-valign mdui-hidden" style="display:none;position:fixed;left:0px;top:0px;width:100%;height:100%;background-color:gray;z-index:114514">
+    <iframe id="if" style="width:100%;height:100%;" frameborder="0"></iframe>
+    <div style="width:100%;height:100%" class="mdui-hidden" id="slf" style="display:none">
+        <span id="sl" class="mdui-center" style="font-size:32px;text-align:center;padding-top:128px">Still Loading (0/3)</span><br>
+        <div class="mdui-spinner mdui-center"></div>
+    </div>
+</div>
+
+
+<style>
+    #功能 {
+        background-color:#EFE3FF;
+        width:84%;
+        height:84%;
+        z-index:191990;
+        border-radius:12px;
+    }
+    [功能头] {
+        background-color:#D6BBFF;
+        border-radius:16px;
+        height:64px;
+        margin-top:16px;
+        padding-left:16px;
+        font-size:1.2em;
+    }
+    [功能开关] {
+        position: absolute;
+        right:32px;
+    }
+    [功能选项卡] {
+        display:none;
+        overflow:auto;
+    }
+</style>
+
+
+<div mdui-dialog="{target: '#功能'}" class="mdui-center mdui-valign mdui-hidden" style="background-color:#3D9ADC;border-radius:25%;height:64px;width:64px;z-index:191981;position:fixed;left:0;top:0;" id="backToTop">
+    <mdui-icon style="font-size:36px;color:white" class="mdui-center" name="router"></mdui-icon>
+</div>
+
+
+
+<div class="mdui-dialog" id="功能">
+    <mdui-navigation-rail contained style="overflow:auto;background-color:white">
+        <mdui-navigation-bar-item onclick="切换功能(1)" value="recent">
+            <mdui-icon slot="icon" src="img/sword_cross.svg"></mdui-icon>
+            Combat
+        </mdui-navigation-bar-item>
+        <mdui-navigation-bar-item onclick="切换功能(2)" value="images">
+            <mdui-icon slot="icon" src="img/run_fast.svg"></mdui-icon>
+            Movement
+        </mdui-navigation-bar-item>
+        <mdui-navigation-bar-item onclick="切换功能(3)" value="library">
+            <mdui-icon slot="icon" src="img/cube_scan.svg"></mdui-icon>
+            Visual
+        </mdui-navigation-bar-item>
+        <mdui-navigation-bar-item label-visibility="labeled" icon="feed" onclick="切换功能(4)" value="library">
+            <mdui-icon slot="icon" src="img/view_list.svg"></mdui-icon>
+            Misc
+        </mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="description" onclick="切换功能(5)" value="library">
+            配置
+        </mdui-navigation-bar-item>
+    </mdui-navigation-rail>
+    <div style="margin:0px 16px 16px 96px">
+        <div id="功能-1" 功能选项卡>
+            <mdui-collapse>
+                <mdui-collapse-item>
+                    <div 功能头 class="mdui-valign mdui-center" slot="header" icon="near_me" onclick="闪退()">
+                        AntiBot
+                        <mdui-switch 功能开关 checked-icon=""></mdui-switch>
+                    </div>
+                </mdui-collapse-item>
+            </mdui-collapse>
+        </div>
+        <div id="功能-2" 功能选项卡>
+            <mdui-collapse>
+                <mdui-collapse-item>
+                    <div 功能头 class="mdui-valign mdui-center" slot="header" icon="near_me" onclick="闪退()">
+                        AirJump
+                        <mdui-switch 功能开关 checked-icon=""></mdui-switch>
+                    </div>
+                </mdui-collapse-item>
+            </mdui-collapse>
+        </div>
+        <div id="功能-3" 功能选项卡>
+            <mdui-collapse>
+                <mdui-collapse-item>
+                    <div 功能头 class="mdui-valign mdui-center" slot="header" icon="near_me" onclick="闪退()">
+                        AntiBlind
+                        <mdui-switch 功能开关 checked-icon=""></mdui-switch>
+                    </div>
+                </mdui-collapse-item>
+            </mdui-collapse>
+        </div>
+        <div id="功能-4" 功能选项卡>
+            <mdui-collapse>
+                <mdui-collapse-item>
+                    <div 功能头 class="mdui-valign mdui-center" slot="header" icon="near_me" onclick="闪退()">
+                        AntiKick
+                        <mdui-switch 功能开关 checked-icon=""></mdui-switch>
+                    </div>
+                </mdui-collapse-item>
+            </mdui-collapse>
+        </div>
+        <div id="功能-5" 功能选项卡>
+            <mdui-collapse>
+                <mdui-collapse-item>
+                    <div 功能头 class="mdui-valign mdui-center" slot="header" icon="near_me" onclick="闪退()">
+                        The Hive 暴力配置
+                        <div 功能开关>
+                            <mdui-button-icon icon="file_upload"></mdui-button-icon>
+                            <mdui-button-icon icon="save"></mdui-button-icon>
+                        </div>
+                    </div>
+                </mdui-collapse-item>
+            </mdui-collapse>
+            <mdui-fab style="position:absolute;right: 0px;bottom: 0px;background-color: #d6bbff;border-radius: 8px 0px 0px 0px;" variant="standard" icon="add"></mdui-fab>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var ele = document.getElementById("backToTop");
+    
+    // 记录的是元素当前位置
+    var currentPosition = { x: 0, y: 0 };
+    
+    // 手指偏移位置，是touchmove中的坐标减去刚触摸时候的坐标得到并更新
+    var offset = {};
+    
+    // 手指刚触摸时候的坐标
+    var touchStartPositon = {};
+    
+    // 移动标志，主要用来解决touchend中currentPosition无意义累加的问题，下方会说明什么是无意义累加
+    var moveFlag = false;
+    
+    // 监听，冒泡
+    
+    ele.addEventListener('touchstart', touchStart, false)
+    ele.addEventListener('touchmove', touchMove, false)
+    ele.addEventListener('touchend', touchEnd, false)
+    //ele.addEventListener('clicka', onclick, false)
+    
+    /*function onclick(e){
+        alert();
+    }*/
+    
+    function touchStart(e) {
+        var touch = e.targetTouches[0];
+        // 触摸时候记录手指初始位置
+        touchStartPositon.x = touch.pageX;
+        touchStartPositon.y = touch.pageY;
+    }
+    function touchMove(e) {
+        moveFlag = true;
+    
+        // 屏蔽默认函数，当有上下滚动条时候，touchMove默认的是滚动屏幕
+        e.preventDefault();
+        var touch = e.changedTouches[0];
+    
+        // 得到用户拖动的相对x y距离，记录在offset中
+        offset.x = touch.pageX - touchStartPositon.x;
+        offset.y = touch.pageY - touchStartPositon.y;
+    
+        // offset + currentPostion就是css要移动的距离
+        move({ x: currentPosition.x + offset.x, y: currentPosition.y + offset.y });
+    
+    }
+    function touchEnd(e) {
+        
+        if (!moveFlag) return;
+    
+        // 无意义累加就在这里：
+        // 用户第一次操作：完成一次拖动，此时offset中x y是有值的
+        // 用户第二次操作：点击元素但是没有拖动，currentPostion就会加上offset中的值
+        // 用户第三次操作：再次拖动，currentPositon中的值就不准了，因为多加了一次offset
+        // 所以判断如果是moveFlag = false时候就直接退出
+        currentPosition.x += offset.x
+        currentPosition.y += offset.y
+        // 对于无意义累加问题，当然也可以通过把offset置位o来解决
+        // offset = { x: 0, y: 0 };
+        /*if(touchStartPositon.x = currentPosition.x&&touchStartPositon.y = currentPosition.y){
+            alert()
+        }*/
+        moveFlag = false;
+    
+    }
+    
+    function move(param) {
+        // 利用transform属性做到移动
+        ele.style.transform = "translate3d(" + param.x + "px, " + param.y + "px, 0)"
+    }
+    
+</script>
+
+
+</html>
+<script>
+    const ifr = document.getElementById("if");
+    ifr.style.display="none";
+</script>
+<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+<div style="
+position:fixed;
+left:10%;
+top:15%;
+z-index:114515;
+pointer-events: none;
+opacity:0.0;
+">
+    <p>Made By TheChuan1503</p>
+    <p></p>
+    <p>DEMO版 不代表最终品质</p>
+    <p></p>
+    <p>😄😄😄</p>
+</div>
+
+
+
+
+
+<script>
+    function 初始化(){
+        if(localStorage.getItem("IPv6")==null){
+            localStorage.setItem("IPv6","自动");
+        }
+        if(localStorage.getItem("zh")==0){
+            document.querySelector("#zh1").setAttribute('description', "Android")
+            document.querySelector("#请登录").setAttribute('class', "mdui-valign");
+        }
+        else{
+            document.querySelector("#zh1").setAttribute('description', "Android (已选择)")
+            document.querySelector("#请登录").setAttribute('class', "mdui-hidden");
+            localStorage.setItem("zh",1)
+        }
+        document.querySelector("#ipv6").setAttribute('description', localStorage.getItem("IPv6"));
+        document.querySelector("body").style.padding="48px 24px 0 24px";
+        功能tab=5
+        切换功能(1)
+        当前应用程式=localStorage.getItem("当前应用程式")
+        if(当前应用程式==undefined||当前应用程式==null||当前应用程式==""){
+            当前应用程式="minecraft";
+        }
+        //if(localStorage.getItem("设定-1")==false||localStorage.getItem("设定-1")==true){
+        for(var i=1;i<=5;i++){
+            //alert(i+" "+localStorage.getItem("设定-"+i))
+            document.getElementById("设定-"+i+"-开关").checked=localStorage.getItem("设定-"+i);
+        }
+        //}
+
+        document.getElementById("应用程式-图标").src=应用程式列表[当前应用程式].icon
+        document.getElementById("应用程式-名称").innerHTML=应用程式列表[当前应用程式].name+" ("+应用程式列表[当前应用程式].pkg+")"
+        document.getElementById("应用程式-版本").innerHTML="v"+应用程式列表[当前应用程式].version
+        document.getElementById("tzyx").innerHTML=应用程式列表[当前应用程式].name+" 已停止运行"
+    }
+    
+    初始化()
+</script>
+<script src="../mdui/js/mdui.min.js"></script>
