@@ -1,6 +1,17 @@
 function start (){
+    if(参数("target")!=false){
+        gotoitem(参数("target"))
+    }
     document.getElementById("blogifr").height=window.innerHeight - 108;
-    
+}
+function 参数(variable){
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i=0;i<vars.length;i++) {
+        var pair = vars[i].split("=");
+        if(pair[0] == variable){return pair[1];}
+    }
+    return(false);
 }
 function tab_dis (tab){
     var tabs=document.getElementsByClassName("tab");
@@ -58,6 +69,8 @@ function gotoitem(item){
         case "ph":
             loadurl("ph");
             break;
+        default:
+            alert("404\n未找到 "+item);
     }
 }
 
